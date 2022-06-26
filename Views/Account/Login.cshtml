@@ -1,0 +1,40 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+<form asp-controller="Account" asp-action="Login" method="post">
+    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+    <div class="text-dark" asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Login"></label>
+        <input asp-for="Login" class="form-control">
+        <span asp-validation-for="Login" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control">
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" asp-for="RememberMe">
+        <label class="form-check-label" asp-for="RememberMe"></label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<hr />
+
+@* asp-route-returnUrl="@Context.Request.Path" *@
+<form asp-controller="Account" asp-action="ExternalLogin" method="post">
+    <button class="btn btn-primary" name="provider" value="Facebook">Facebook</button>
+    <button class="btn btn-primary" name="provider" value="Google">Google</button>
+    <button class="btn btn-primary" name="provider" value="Microsoft">Microsoft</button>
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

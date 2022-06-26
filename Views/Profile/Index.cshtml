@@ -1,0 +1,28 @@
+﻿@model ProfileViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Profile</h1>
+
+<h2>Name: @Model.Fullname</h2>
+<h2>Email: @Model.Email</h2>
+<h2>Year: @Model.Year</h2>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>Type</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in User.Claims)
+        {
+            <tr>
+                <th>@item.Type</th>
+                <td>@item.Value</td>
+            </tr>
+        }
+    </tbody>
+</table>

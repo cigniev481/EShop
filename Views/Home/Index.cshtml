@@ -1,0 +1,37 @@
+﻿@using Microsoft.Extensions.Localization;
+@using Microsoft.AspNetCore.Http;
+@inject IStringLocalizer<SharedResource> localizer
+@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@localizer["Welcome"]</h1>
+    <h2>Lang:  @ViewBag.Lang</h2>
+    <h2>UILang:  @ViewBag.UILang</h2>
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="@item.ImageUrl" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <p class="card-text">@item.Price</p>
+                        <a asp-controller="Home"
+                           asp-action="AddToCart"
+                           asp-route-id="@item.Id"
+                           asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">@localizer["AddToCart"]</a>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+<p>
+    @Context.Session.GetString("cart")
+</p>
